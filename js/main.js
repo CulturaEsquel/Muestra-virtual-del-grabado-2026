@@ -1,19 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargamos ambos JSON en paralelo
-    Promise.all([
-        fetch('secciones.json').then(res => res.json())
-    ])
-    .then(([premiosData, seccionesData]) => {
-        
-      
-        // --- 2. RENDERIZAR LAS 4 SECCIONES DEL SALÓN ---
-        // Accedemos a 'seccionesData.secciones' debido a la estructura de tu archivo
-        const sec = seccionesData.secciones;
+    // Cargamos únicamente el archivo de secciones
+    fetch('secciones.json')
+        .then(res => res.json())
+        .then(seccionesData => {
+            const sec = seccionesData.secciones;
 
-        renderizarSeccion('grabado', sec.grabado_arte_impreso);
-        
-    })
-    .catch(error => console.error('Error al cargar los datos del catálogo:', error));
+            // Renderizamos únicamente la sección de grabado y arte impreso
+            renderizarSeccion('grabado', sec.grabado_arte_impreso);
+        })
+        .catch(error => console.error('Error al cargar los datos del catálogo:', error));
 });
 
 // Función genérica para pintar cada sección de obras
@@ -27,7 +22,6 @@ function renderizarSeccion(nombreId, dataSeccion) {
     // 2. Renderizar Obras Seleccionadas (con el diseño normal de grilla)
     if (dataSeccion.seleccionadas && dataSeccion.seleccionadas.length > 0) {
         htmlContenido += `<div class="galeria">`;
-        
         dataSeccion.seleccionadas.forEach(obra => {
             const urlImagen = `img/${obra.id_archivo}.jpg`;
             htmlContenido += `
