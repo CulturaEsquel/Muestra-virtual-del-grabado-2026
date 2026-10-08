@@ -24,15 +24,19 @@ function renderizarSeccion(nombreId, dataSeccion) {
         htmlContenido += `<div class="galeria">`;
         dataSeccion.seleccionadas.forEach(obra => {
             const urlImagen = `img/${obra.id_archivo}.jpg`;
+			// Filtramos solo las técnicas/traducciones que existen y no están vacías
+			const tecnicas = [obra.Tes, obra.tecnica, obra.Ten]
+			  .filter(texto => texto && texto.trim() !== "")
+			  .join(" / ");
             htmlContenido += `
                 <div class="obra-card">
                     <a href="${urlImagen}" data-lightbox="${nombreId}" data-title="${obra.titulo} - ${obra.nombre} ${obra.apellido}">
                         <img src="${urlImagen}" alt="${obra.titulo}" loading="lazy">
                     </a>
-                    <h3>${obra.titulo}</h3>
-					<p>${obra.tecnica}</p>
+                    <h3>"${obra.titulo}"</h3>
+					<p><em>${tecnicas}</em></p>
                     <h4>Autor:</strong> ${obra.nombre} ${obra.apellido}</h4>
-                    <p><em>${obra.localidad} - ${obra.pais}</em></p>
+                    <p>${obra.localidad} - ${obra.pais}</p>
                 </div>
             `;
         });
