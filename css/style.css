@@ -227,6 +227,7 @@ body {
 
 .logos-container img {
     max-height: 45px;
+    max-width: 60vw;
     object-fit: contain;
     opacity: 0.85;
     transition: opacity 0.2s;
