@@ -32,7 +32,7 @@ function renderizarSeccion(nombreId, dataSeccion) {
                     <h3>${obra.titulo}</h3>
 					<p>${obra.tecnica}</p>
                     <h4>Autor:</strong> ${obra.nombre} ${obra.apellido}</h4>
-                    <p><em>${obra.pais} ${obra.localidad}</em></p>
+                    <p><em>${obra.localidad} - ${obra.pais}</em></p>
                 </div>
             `;
         });
